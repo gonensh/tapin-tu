@@ -95,11 +95,13 @@ public class TagViewer extends Activity {
     //////////
     private void tagHandler(long tagId){
         //send data to Firebase
-        //Checkin checkin = new Checkin(tagId);
-        //Firebase checkinRef = rootRef.child("exampleEvent");
-
-        //checkinRef.setValue(checkin);
         Firebase usersRef = rootRef.child("users");
+
+        //CHECK IF USER EXISTS
+        if(userExists(tagId))
+            goToSuccess(tagId);
+        else
+            goToCreateUser(tagId);
 
         //TO-DO: Create Checkin class just like the example
         //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
@@ -112,6 +114,19 @@ public class TagViewer extends Activity {
         usersRef.setValue(users);
 
         System.out.println("NFC read ID: "+tagId);
+
+    }
+
+    boolean userExists(long tagId){
+        //ToDo: Check with Firebase
+        return false;
+    }
+
+    void goToSuccess(long tagId){
+
+    }
+
+    void goToCreateUser(long tagId){
 
     }
 
