@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import tk.gonensh.TapInTu.record.ParsedNdefRecord;
 import android.app.Activity;
@@ -63,16 +64,19 @@ public class TapHereActivity extends Activity {
 
     private AlertDialog mDialog;
 
-    private Firebase rootRef;
+    private Firebase eventRef,userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tap_here);
 
+        //get Event name from intent
+        String event_name = getIntent().getStringExtra("event_name");
         //setup Firebase
         Firebase.setAndroidContext(this);
-        rootRef = new Firebase("https://tapin.firebaseio.com/tapin");
+        userRef = new Firebase("https://tapin.firebaseio.com/tapin/users");
+        eventRef = new Firebase("https://tapin.firebaseio.com/tapin/events/"+event_name);
 
         mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
@@ -101,7 +105,6 @@ public class TapHereActivity extends Activity {
     //////////
     private void tagHandler(long tagId){
         //send data to Firebase
-        Firebase usersRef = rootRef.child("users");
 
         //CHECK IF USER EXISTS
         if(userExists(tagId))
@@ -112,13 +115,23 @@ public class TapHereActivity extends Activity {
 
         //TO-DO: Create Checkin class just like the example
         //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
+        //ToDo: Implement into HashMap
 
-        Checkin alanisawesome = new Checkin("Alan Turing", tagId);
-        Checkin gracehop = new Checkin("Grace Hopper", 1906);
-        Map<String, Checkin> users = new HashMap<String, Checkin>();
-        users.put("alanisawesome", alanisawesome);
-        users.put("gracehop", gracehop);
-        usersRef.setValue(users);
+        Firebase checkinRef = eventRef.child("checkins");
+
+        Map<String, String> checkins = new HashMap<String, String>();
+        String timestamp = new Date().toString();
+        //Checkin checkin = new Checkin(tagId, timestamp);
+
+        checkins.put(Long.toString(tagId),timestamp);
+        /* Event -
+                 |-Checkins -
+                            |- userId
+                            |- timestamp
+                                    */
+
+        //Push to Firebase
+        checkinRef.setValue(checkins);
 
         System.out.println("NFC read ID: "+tagId);
 
@@ -126,9 +139,11 @@ public class TapHereActivity extends Activity {
 
     boolean userExists(final long tagId){
         //ToDo: Check with Firebase
-        Log.e("FB Querying ",new Long(tagId).toString());
+        Log.e("FB Querying ", Long.toString(tagId));
         Firebase userRef = new Firebase("https://tapin.firebaseio.com/users");
         Query userQueryRef = userRef.orderByChild("userId").equalTo(tagId);
+
+
         userQueryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChild) {

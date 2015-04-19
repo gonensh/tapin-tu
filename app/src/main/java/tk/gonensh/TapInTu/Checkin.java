@@ -8,7 +8,7 @@ class Checkin {
     private long userId;
     private String timestamp;
     public Checkin() {}
-    public Checkin(String timestamp, long userId) {
+    public Checkin(long userId, String timestamp) {
         this.timestamp = timestamp;
         this.userId = userId;
     }
