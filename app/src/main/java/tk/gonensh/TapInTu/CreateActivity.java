@@ -47,7 +47,7 @@ public class CreateActivity extends Activity {
                 //submit new user to Firebase
                 Firebase fb = new Firebase(firebaseUrl);
                 Firebase userRef = fb.child("users");
-
+                //ToDO: Fix deleting old data
                 Map<String, User> users = new HashMap<String, User>();
                 String timestamp = new Date().toString();
                 User user = new User(user_name, user_id);
