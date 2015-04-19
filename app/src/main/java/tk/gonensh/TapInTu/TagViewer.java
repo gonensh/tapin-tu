@@ -38,11 +38,16 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 
 /**
  * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.
@@ -119,6 +124,33 @@ public class TagViewer extends Activity {
 
     boolean userExists(long tagId){
         //ToDo: Check with Firebase
+        Firebase userRef = new Firebase("https://tapin.firebaseio.com/users");
+        Query userQueryRef = userRef.orderByChild("userId").equalTo(tagId);
+        userQueryRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
+                System.out.println("Added: "+snapshot.getKey());
+            }
+            public void onChildChanged(DataSnapshot snapshot, String previousChild) {
+                System.out.println("Changed: "+snapshot.getKey());
+            }
+            public void onChildMoved(DataSnapshot snapshot, String previousChild) {
+                System.out.println("Moved: "+snapshot.getKey());
+            }
+            public void onChildRemoved(DataSnapshot snapshot, String previousChild) {
+                System.out.println("Removed: "+snapshot.getKey());
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot snapshot) {
+                System.out.println("Removed: "+snapshot.getKey());
+            }
+            @Override
+            public void onCancelled(FirebaseError e) {
+                Log.e("Firebase Error: ", e.getMessage());
+            }
+
+
+        });
         return false;
     }
 
