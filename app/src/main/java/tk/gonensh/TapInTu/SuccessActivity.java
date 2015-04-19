@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class SuccessActivity extends Activity {
@@ -17,16 +18,17 @@ public class SuccessActivity extends Activity {
         setContentView(R.layout.activity_success_activity);
 
       //  create_user user = new create_user();
-        String name;
+           TextView textv = (TextView) findViewById(R.id.success);
+            textv.setText("Success, "+getIntent().getStringExtra("userName")+"!\n You are checked in.");
 
         Button success = (Button) findViewById(R.id.success_button);
 
         success.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent to_scan = new Intent(SuccessActivity.this, TapHereActivity.class);
-                startActivity(to_scan);
-            }
+                                       @Override
+                                       public void onClick(View view) {
+                                           Intent to_scan = new Intent(SuccessActivity.this, TapHereActivity.class);
+                                           startActivity(to_scan);
+                                       }
         });
     }
 

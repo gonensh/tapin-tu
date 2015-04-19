@@ -98,7 +98,8 @@ public class TapHereActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.getValue() != null) {
-                    goToSuccess(tagId);
+                    String user_name = snapshot.getValue().toString().split("fullName=")[1].replace('}',' ').trim();
+                    goToSuccess(tagId,user_name);
                 } else {
                     goToCreateUser(tagId);
                 }
@@ -109,9 +110,10 @@ public class TapHereActivity extends Activity {
         });
     }
 
-    void goToSuccess(String tagId){
+    void goToSuccess(String tagId, String userName){
         Intent successIntent = new Intent(TapHereActivity.this,SuccessActivity.class);
         successIntent.putExtra("tagId",tagId);
+        successIntent.putExtra("userName",userName);
         startActivity(successIntent);
     }
 
