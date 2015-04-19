@@ -39,4 +39,5 @@
     <string name="success">Success!</string>
     <string name="success_button">Scan next..</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_create">CreateActivity</string>
 </resources>
