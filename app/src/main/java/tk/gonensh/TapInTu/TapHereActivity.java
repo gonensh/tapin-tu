@@ -166,9 +166,8 @@ public class TapHereActivity extends Activity {
     }
 
     void goToCreateUser(long tagId){
-            if(!userExists(tagId)){
-
-            }
+        Intent CreateUser = new Intent(TapHereActivity.this,CreateActivity.class);
+        startActivity(CreateUser);
     }
 
     /////////
