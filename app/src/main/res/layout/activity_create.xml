@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:weightSum="1">
 
     <TextView
@@ -10,9 +11,12 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/new_user"
         android:id="@+id/new_user"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
-        android:layout_weight="0.02" />
+        android:layout_weight="0.02"
+        android:textColor="#4c6076" />
 
     <EditText
         android:layout_width="330dp"
@@ -20,7 +24,8 @@
         android:id="@+id/user_name"
         android:layout_gravity="center_horizontal"
         android:text="Name:"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:textColor="#4c6076" />
 
 
     <EditText
@@ -28,7 +33,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/user_id"
         android:layout_gravity="center_horizontal"
-        android:text="ID:" />
+        android:text="ID:"
+        android:textColor="#4c6076" />
 
     <Button
         android:layout_width="wrap_content"

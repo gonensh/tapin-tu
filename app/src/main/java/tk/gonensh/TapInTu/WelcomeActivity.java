@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class WelcomeActivity extends Activity {
@@ -24,6 +25,10 @@ public class WelcomeActivity extends Activity {
             public void onClick(View v) {
                 EditText et1 = (EditText) findViewById(R.id.text_input);
                 String event_name = et1.getText().toString();
+                if(event_name==null){
+                    Toast.makeText(WelcomeActivity.this, "Please enter...", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent1 = new Intent(WelcomeActivity.this, TapHereActivity.class);
                 intent1.putExtra("event_name",event_name);
                 startActivity(intent1);
