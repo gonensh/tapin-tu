@@ -36,8 +36,6 @@
         android:layout_below="@+id/hello_world1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="31dp"
-
-
         android:textColor="#4c6076" />
 
     <EditText
@@ -51,6 +49,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="#4c6076"/>
 
 </RelativeLayout>

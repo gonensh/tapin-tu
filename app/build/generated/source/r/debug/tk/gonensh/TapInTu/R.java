@@ -23,15 +23,15 @@ public final class R {
     }
     public static final class id {
         public static final int NFCbutton=0x7f080007;
-        public static final int TapIn=0x7f08000b;
         public static final int action_settings=0x7f08000d;
         public static final int choose_event=0x7f080008;
         public static final int firebase_button=0x7f080003;
         public static final int hello_world1=0x7f080006;
-        public static final int imageView=0x7f08000c;
+        public static final int imageView=0x7f08000b;
         public static final int new_user=0x7f080000;
         public static final int success=0x7f080004;
         public static final int success_button=0x7f080005;
+        public static final int tapin=0x7f08000c;
         public static final int text=0x7f08000a;
         public static final int text_input=0x7f080009;
         public static final int user_id=0x7f080002;
