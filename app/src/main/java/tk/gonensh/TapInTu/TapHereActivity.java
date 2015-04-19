@@ -61,7 +61,7 @@ public class TapHereActivity extends Activity {
 
         eventRef = new Firebase(firebaseUrl+"/events/"+event_name);
 
-        mTagContent = (LinearLayout) findViewById(R.id.list);
+        //mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
 
         mDialog = new AlertDialog.Builder(this).setNeutralButton("Ok", null).create();
@@ -86,25 +86,18 @@ public class TapHereActivity extends Activity {
         mDialog.show();
     }
     //////////
-    private void tagHandler(long tag_id){
-        //send data to Firebase
-        String tagId = Long.toString(tag_id);
-
+    private void tagHandler(String tagId){
         //CHECK IF USER EXISTS
         if(userExists(tagId))
             goToSuccess(tagId);
         else
             goToCreateUser(tagId);
 
-
-        //TO-DO: Create Checkin class just like the example
-        //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
-        //ToDo: Implement into HashMap
-
         Firebase checkinRef = eventRef.child("checkins").push();
 
         String timestamp = new Date().toString();
         Checkin checkin = new Checkin(tagId,timestamp);
+
         //Push to Firebase
         checkinRef.setValue(checkin);
 
@@ -233,92 +226,15 @@ public class TapHereActivity extends Activity {
                 }
             } else {
                 // Unknown tag type
-                byte[] empty = new byte[0];
-                byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
-                Parcelable tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                byte[] payload = dumpTagData(tag).toString().getBytes();
-                NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
-                NdefMessage msg = new NdefMessage(new NdefRecord[] { record });
-                msgs = new NdefMessage[] { msg };
-            }
-            // Setup the views
-            buildTagViews(msgs);
-        }
-    }
-
-    private Long dumpTagData(Parcelable p) {
-        Tag tag = (Tag) p;
-        byte[] id = tag.getId();
-        Long tagId = getDec(id);
-        tagHandler(tagId);
-
-        return tagId;
-        /*
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Tag ID (hex): ").append(getHex(id)).append("\n");
-        sb.append("Tag ID (dec): ").append(getDec(id)).append("\n");
-        sb.append("ID (reversed): ").append(getReversed(id)).append("\n");
-
-        String prefix = "android.nfc.tech.";
-
-        sb.append("Technologies: ");
-        for (String tech : tag.getTechList()) {
-            sb.append(tech.substring(prefix.length()));
-            sb.append(", ");
-        }
-        sb.delete(sb.length() - 2, sb.length());
-        for (String tech : tag.getTechList()) {
-            if (tech.equals(MifareClassic.class.getName())) {
-                sb.append('\n');
-                MifareClassic mifareTag = MifareClassic.get(tag);
-                String type = "Unknown";
-                switch (mifareTag.getType()) {
-                case MifareClassic.TYPE_CLASSIC:
-                    type = "Classic";
-                    break;
-                case MifareClassic.TYPE_PLUS:
-                    type = "Plus";
-                    break;
-                case MifareClassic.TYPE_PRO:
-                    type = "Pro";
-                    break;
-                }
-                sb.append("Mifare Classic type: ");
-                sb.append(type);
-                sb.append('\n');
-
-                sb.append("Mifare size: ");
-                sb.append(mifareTag.getSize() + " bytes");
-                sb.append('\n');
-
-                sb.append("Mifare sectors: ");
-                sb.append(mifareTag.getSectorCount());
-                sb.append('\n');
-
-                sb.append("Mifare blocks: ");
-                sb.append(mifareTag.getBlockCount());
+                /*byte[] empty = new byte[0];
+                byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);*/
+                Parcelable par = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+                Tag tag = (Tag) par;
+                String sTag = getHex(tag.getId());
+                tagHandler(sTag);
             }
 
-            if (tech.equals(MifareUltralight.class.getName())) {
-                sb.append('\n');
-                MifareUltralight mifareUlTag = MifareUltralight.get(tag);
-                String type = "Unknown";
-                switch (mifareUlTag.getType()) {
-                case MifareUltralight.TYPE_ULTRALIGHT:
-                    type = "Ultralight";
-                    break;
-                case MifareUltralight.TYPE_ULTRALIGHT_C:
-                    type = "Ultralight C";
-                    break;
-                }
-                sb.append("Mifare Ultralight type: ");
-                sb.append(type);
-            }
         }
-
-        return sb.toString();
-        */
     }
 
     private String getHex(byte[] bytes) {
@@ -328,9 +244,6 @@ public class TapHereActivity extends Activity {
             if (b < 0x10)
                 sb.append('0');
             sb.append(Integer.toHexString(b));
-            if (i > 0) {
-                sb.append(" ");
-            }
         }
         return sb.toString();
     }
@@ -355,28 +268,6 @@ public class TapHereActivity extends Activity {
             factor *= 256l;
         }
         return result;
-    }
-
-    void buildTagViews(NdefMessage[] msgs) {
-        if (msgs == null || msgs.length == 0) {
-            return;
-        }
-        LayoutInflater inflater = LayoutInflater.from(this);
-        LinearLayout content = mTagContent;
-
-        // Parse the first message in the list
-        // Build views for all of the sub records
-        Date now = new Date();
-        List<ParsedNdefRecord> records = NdefMessageParser.parse(msgs[0]);
-        final int size = records.size();
-        for (int i = 0; i < size; i++) {
-            TextView timeView = new TextView(this);
-            timeView.setText(TIME_FORMAT.format(now));
-            content.addView(timeView, 0);
-            ParsedNdefRecord record = records.get(i);
-            content.addView(record.getView(this, inflater, content, i), 1 + i);
-            content.addView(inflater.inflate(R.layout.tag_divider, content, false), 2 + i);
-        }
     }
 
     @Override
