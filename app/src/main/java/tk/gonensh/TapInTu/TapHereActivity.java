@@ -52,7 +52,7 @@ import com.firebase.client.Query;
 /**
  * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.
  */
-public class TagViewer extends Activity {
+public class TapHereActivity extends Activity {
 
     private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
     private LinearLayout mTagContent;
