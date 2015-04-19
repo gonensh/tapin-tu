@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tk.gonensh.nfc_reader;
+package tk.gonensh.TapInTu;
 
 import java.nio.charset.Charset;
 import java.text.DateFormat;
@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import tk.gonensh.nfc_reader.record.ParsedNdefRecord;
+import tk.gonensh.TapInTu.record.ParsedNdefRecord;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;

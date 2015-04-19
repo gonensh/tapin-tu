@@ -1,11 +1,11 @@
 /**
  * Automatically generated file. DO NOT MODIFY
  */
-package tk.gonensh.nfc_reader;
+package tk.gonensh.TapInTu;
 
 public final class BuildConfig {
   public static final boolean DEBUG = Boolean.parseBoolean("true");
-  public static final String APPLICATION_ID = "tk.gonensh.nfc_reader";
+  public static final String APPLICATION_ID = "tk.gonensh.TapInTu";
   public static final String BUILD_TYPE = "debug";
   public static final String FLAVOR = "";
   public static final int VERSION_CODE = 13;

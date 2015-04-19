@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tk.gonensh.nfc_reader.record;
+package tk.gonensh.TapInTu.record;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-import tk.gonensh.nfc_reader.NdefMessageParser;
-import tk.gonensh.nfc_reader.R;
+import tk.gonensh.TapInTu.NdefMessageParser;
+import tk.gonensh.TapInTu.R;
 import android.app.Activity;
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;

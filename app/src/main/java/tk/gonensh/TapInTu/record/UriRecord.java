@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tk.gonensh.nfc_reader.record;
+package tk.gonensh.TapInTu.record;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
-import tk.gonensh.nfc_reader.R;
+import tk.gonensh.TapInTu.R;
 import android.app.Activity;
 import android.net.Uri;
 import android.nfc.NdefRecord;

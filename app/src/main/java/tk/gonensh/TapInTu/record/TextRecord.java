@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package tk.gonensh.nfc_reader.record;
+package tk.gonensh.TapInTu.record;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-import tk.gonensh.nfc_reader.R;
+import tk.gonensh.TapInTu.R;
 import android.app.Activity;
 import android.nfc.NdefRecord;
 import android.view.LayoutInflater;

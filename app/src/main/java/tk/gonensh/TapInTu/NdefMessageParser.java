@@ -13,15 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package tk.gonensh.nfc_reader;
+package tk.gonensh.TapInTu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tk.gonensh.nfc_reader.record.ParsedNdefRecord;
-import tk.gonensh.nfc_reader.record.SmartPoster;
-import tk.gonensh.nfc_reader.record.TextRecord;
-import tk.gonensh.nfc_reader.record.UriRecord;
+import tk.gonensh.TapInTu.record.ParsedNdefRecord;
+import tk.gonensh.TapInTu.record.SmartPoster;
+import tk.gonensh.TapInTu.record.TextRecord;
+import tk.gonensh.TapInTu.record.UriRecord;
 import android.app.Activity;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;

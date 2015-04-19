@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tk.gonensh.nfc_reader.record;
+package tk.gonensh.TapInTu.record;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
