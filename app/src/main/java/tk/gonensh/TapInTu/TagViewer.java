@@ -20,8 +20,10 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import tk.gonensh.TapInTu.record.ParsedNdefRecord;
 import android.app.Activity;
@@ -93,8 +95,21 @@ public class TagViewer extends Activity {
     //////////
     private void tagHandler(long tagId){
         //send data to Firebase
-        Checkin checkin = new Checkin(tagId);
-        //rootRef.setValue(checkin);
+        //Checkin checkin = new Checkin(tagId);
+        //Firebase checkinRef = rootRef.child("exampleEvent");
+
+        //checkinRef.setValue(checkin);
+        Firebase usersRef = rootRef.child("users");
+
+        //TO-DO: Create Checkin class just like the example
+        //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
+
+        Checkin alanisawesome = new Checkin("Alan Turing", tagId);
+        Checkin gracehop = new Checkin("Grace Hopper", 1906);
+        Map<String, Checkin> users = new HashMap<String, Checkin>();
+        users.put("alanisawesome", alanisawesome);
+        users.put("gracehop", gracehop);
+        usersRef.setValue(users);
 
         System.out.println("NFC read ID: "+tagId);
 
@@ -325,3 +340,5 @@ public class TagViewer extends Activity {
     }
 
 }
+
+
