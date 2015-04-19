@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2010 The Android Open Source Project
- * Copyright (C) 2011 Adam Nybäck
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package tk.gonensh.TapInTu;
 
 import java.nio.charset.Charset;
@@ -24,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import tk.gonensh.TapInTu.record.ParsedNdefRecord;
 import android.app.Activity;
@@ -49,9 +34,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 
-/**
- * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.
- */
 public class TapHereActivity extends Activity {
 
     private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
@@ -63,16 +45,21 @@ public class TapHereActivity extends Activity {
 
     private AlertDialog mDialog;
 
-    private Firebase rootRef;
+    private Firebase eventRef,userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tap_here);
 
+        //get Event name from intent
+        String event_name = getIntent().getStringExtra("event_name");
         //setup Firebase
         Firebase.setAndroidContext(this);
-        rootRef = new Firebase("https://tapin.firebaseio.com/tapin");
+        String firebaseUrl = getResources().getString(R.string.firebaseUrl);
+        userRef = new Firebase(firebaseUrl+"/users");
+
+        eventRef = new Firebase(firebaseUrl+"/events/"+event_name);
 
         mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
@@ -99,9 +86,9 @@ public class TapHereActivity extends Activity {
         mDialog.show();
     }
     //////////
-    private void tagHandler(long tagId){
+    private void tagHandler(long tag_id){
         //send data to Firebase
-        Firebase usersRef = rootRef.child("users");
+        String tagId = Long.toString(tag_id);
 
         //CHECK IF USER EXISTS
         if(userExists(tagId))
@@ -112,29 +99,33 @@ public class TapHereActivity extends Activity {
 
         //TO-DO: Create Checkin class just like the example
         //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
+        //ToDo: Implement into HashMap
 
-        Checkin alanisawesome = new Checkin("Alan Turing", tagId);
-        Checkin gracehop = new Checkin("Grace Hopper", 1906);
-        Map<String, Checkin> users = new HashMap<String, Checkin>();
-        users.put("alanisawesome", alanisawesome);
-        users.put("gracehop", gracehop);
-        usersRef.setValue(users);
+        Firebase checkinRef = eventRef.child("checkins");
+
+        Map<String, String> checkins = new HashMap<String, String>();
+        String timestamp = new Date().toString();
+        checkins.put(tagId,timestamp);
+
+        //Push to Firebase
+        checkinRef.setValue(checkins);
 
         System.out.println("NFC read ID: "+tagId);
 
     }
 
-    boolean userExists(final long tagId){
+    boolean userExists(String tagId){
         //ToDo: Check with Firebase
-        Log.e("FB Querying ",new Long(tagId).toString());
-        Firebase userRef = new Firebase("https://tapin.firebaseio.com/users");
+        Log.e("FB Querying ", tagId);
         Query userQueryRef = userRef.orderByChild("userId").equalTo(tagId);
+
+
         userQueryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChild) {
                 System.out.println("FB Added: "+snapshot.getKey());
                 //ToDo: send user/timestamp to Firebase
-                goToSuccess(tagId);
+                //goToSuccess(tagId);
             }
             public void onChildChanged(DataSnapshot snapshot, String previousChild) {
                 System.out.println("FB Changed: "+snapshot.getKey());
@@ -160,14 +151,16 @@ public class TapHereActivity extends Activity {
         return false;
     }
 
-    void goToSuccess(long tagId){
-        Intent success = new Intent(TapHereActivity.this,SuccessActivity.class);
-        startActivity(success);
+    void goToSuccess(String tagId){
+        Intent successIntent = new Intent(TapHereActivity.this,SuccessActivity.class);
+
+        startActivity(successIntent);
     }
 
-    void goToCreateUser(long tagId){
-        Intent CreateUser = new Intent(TapHereActivity.this,CreateActivity.class);
-        startActivity(CreateUser);
+    void goToCreateUser(String tagId){
+        Intent createUserIntent = new Intent(TapHereActivity.this,CreateActivity.class);
+        createUserIntent.putExtra("tagId", tagId);
+        startActivity(createUserIntent);
     }
 
     /////////

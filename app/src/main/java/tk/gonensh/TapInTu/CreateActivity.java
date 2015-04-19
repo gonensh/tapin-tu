@@ -10,18 +10,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class CreateActivity extends Activity {
+
+    String tagId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
+        tagId = getIntent().getStringExtra("tagId");
+        Button goBackButton = (Button) findViewById(R.id.firebase_button);
 
-        Button button2 = (Button) findViewById(R.id.firebase_button);
-
-        button2.setOnClickListener(new View.OnClickListener() {
+        goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText name = (EditText) findViewById(R.id.user_name);
@@ -29,17 +37,28 @@ public class CreateActivity extends Activity {
 
                 EditText id = (EditText) findViewById(R.id.user_id);
                 String user_id = id.getText().toString();
-                if(user_id==null || user_name == null){
+                if (user_id == null || user_name == null) {
                     Toast.makeText(CreateActivity.this, "Please enter...", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                Intent intent2 = new Intent(CreateActivity.this, SuccessActivity.class);
+                String firebaseUrl = getResources().getString(R.string.firebaseUrl);
 
-                intent2.putExtra("user_name",user_name);
-                intent2.putExtra("user_id",user_id);
+                //submit new user to Firebase
+                Firebase fb = new Firebase(firebaseUrl);
+                Firebase userRef = fb.child("users");
 
-                startActivity(intent2);
+                Map<String, User> users = new HashMap<String, User>();
+                String timestamp = new Date().toString();
+                User user = new User(user_name, user_id);
+                users.put(tagId,user);
+
+                //Push to Firebase
+                userRef.setValue(users);
+
+                Intent successIntent = new Intent(CreateActivity.this, SuccessActivity.class);
+                successIntent.putExtra("tagId", user_id);
+                startActivity(successIntent);
             }
         });
     }
