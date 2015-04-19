@@ -1,8 +1,6 @@
 package tk.gonensh.TapInTu;
 
 import java.nio.charset.Charset;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -18,11 +16,11 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.util.Log;
-import android.widget.LinearLayout;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.Query;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class TapHereActivity extends Activity {
 
@@ -75,11 +73,13 @@ public class TapHereActivity extends Activity {
     //////////
     private void tagHandler(String tagId){
         //CHECK IF USER EXISTS
-        if(userExists(tagId))
+        checkIfUserExists(tagId);
+        /*
+        if(checkIfUserExists(tagId))
             goToSuccess(tagId);
         else
             goToCreateUser(tagId);
-
+*/
         Firebase checkinRef = eventRef.child("checkins").push();
 
         String timestamp = new Date().toString();
@@ -92,41 +92,21 @@ public class TapHereActivity extends Activity {
 
     }
 
-    boolean userExists(String tagId){
-        //ToDo: Check with Firebase
-        Log.e("FB Querying ", tagId);
-        //Query userQueryRef = userRef.orderByChild("userId").equalTo(tagId);
-
-        /*
-        userQueryRef.addChildEventListener(new ChildEventListener() {
+    void checkIfUserExists(final String tagId){
+        Firebase usersRef= new Firebase(getResources().getString(R.string.firebaseUrl)+"/users");
+        usersRef.child(tagId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
-                System.out.println("FB Added: "+snapshot.getKey());
-                //ToDo: send user/timestamp to Firebase
-                //goToSuccess(tagId);
-            }
-            public void onChildChanged(DataSnapshot snapshot, String previousChild) {
-                System.out.println("FB Changed: "+snapshot.getKey());
-                Log.e("FB Changed ",snapshot.getKey());
-            }
-            public void onChildMoved(DataSnapshot snapshot, String previousChild) {
-                System.out.println("FB Moved: "+snapshot.getKey());
-            }
-            public void onChildRemoved(DataSnapshot snapshot, String previousChild) {
-                System.out.println("FB Removed: "+snapshot.getKey());
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    goToSuccess(tagId);
+                } else {
+                    goToCreateUser(tagId);
+                }
             }
             @Override
-            public void onChildRemoved(DataSnapshot snapshot) {
-                System.out.println("FB Removed: "+snapshot.getKey());
+            public void onCancelled(FirebaseError arg0) {
             }
-            @Override
-            public void onCancelled(FirebaseError e) {
-                Log.e("Firebase Error: ", e.getMessage());
-            }
-
-
-        });*/
-        return false;
+        });
     }
 
     void goToSuccess(String tagId){
