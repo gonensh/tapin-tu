@@ -2,11 +2,53 @@
 <items version="2" >
 
     <item
+        jar="/home/gonen/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.2.2/285cb9c666f0f0f3dd8a1be04e1f457eb7b15113/jackson-annotations-2.2.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="285cb9c666f0f0f3dd8a1be04e1f457eb7b15113">
+        <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.2.2-256a9a40afe84a5f97c858a8117c2f1f2ed8acdc.jar" />
+    </item>
+    <item
+        jar="/home/gonen/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.11/d37cb67277928cf59344b4196af8d9cee1f1a27c/tubesock-0.0.11.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d37cb67277928cf59344b4196af8d9cee1f1a27c">
+        <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/tubesock-0.0.11-76c8b43550262ba9036850188bdf660a3bf893d5.jar" />
+    </item>
+    <item
+        jar="/home/gonen/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.2/d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b/jackson-core-2.2.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
+        <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.2-15bb9695220561cd1fcd72c6c77a4922e54d5c73.jar" />
+    </item>
+    <item
+        jar="/home/gonen/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-android/2.2.3/682d0a8dce58e47bde57316aac7d6bb5618dee6b/firebase-client-android-2.2.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="682d0a8dce58e47bde57316aac7d6bb5618dee6b">
+        <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/firebase-client-android-2.2.3-cf9e942e4cae600eb3ec00c0960a4b8fd4d17689.jar" />
+    </item>
+    <item
+        jar="/home/gonen/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.2.3/e787a02a644f2681e4af82cdc88dd2f69877692b/firebase-client-jvm-2.2.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e787a02a644f2681e4af82cdc88dd2f69877692b">
+        <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/firebase-client-jvm-2.2.3-6e385e61d30139b1296684ec2f0936ff0d19e83f.jar" />
+    </item>
+    <item
         jar="/home/gonen/Downloads/nfc-reader2/app/libs/guavalib.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4dad6eb644b525f4222e3c55d31c16660bacb92e">
         <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/guavalib-079cd852d2b8f0d020cafe6829a5f41f455ed83a.jar" />
+    </item>
+    <item
+        jar="/home/gonen/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.2.2/3c8f6018eaa72d43b261181e801e6f8676c16ef6/jackson-databind-2.2.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3c8f6018eaa72d43b261181e801e6f8676c16ef6">
+        <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/jackson-databind-2.2.2-7b19f8afbdde92894a80911a4c06e8799033b199.jar" />
     </item>
 
 </items>

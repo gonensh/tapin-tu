@@ -56,6 +56,8 @@ public class TagViewer extends Activity {
 
     private AlertDialog mDialog;
 
+    private Firebase rootRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class TagViewer extends Activity {
 
         //setup Firebase
         Firebase.setAndroidContext(this);
-
+        rootRef = new Firebase("https://tapin.firebaseio.com/tapin");
 
         mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
@@ -91,7 +93,8 @@ public class TagViewer extends Activity {
     //////////
     private void tagHandler(long tagId){
         //send data to Firebase
-
+        Checkin checkin = new Checkin(tagId);
+        //rootRef.setValue(checkin);
 
         System.out.println("NFC read ID: "+tagId);
 
