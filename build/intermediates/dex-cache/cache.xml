@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/gonen/Downloads/nfc-reader2/app/libs/guavalib.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4dad6eb644b525f4222e3c55d31c16660bacb92e">
+        <dex dex="/home/gonen/Downloads/nfc-reader2/app/build/intermediates/pre-dexed/debug/guavalib-079cd852d2b8f0d020cafe6829a5f41f455ed83a.jar" />
+    </item>
+
+</items>
