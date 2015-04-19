@@ -4,13 +4,8 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
 
-import tk.gonensh.TapInTu.record.ParsedNdefRecord;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -24,20 +19,12 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 
 public class TapHereActivity extends Activity {
-
-    private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
-    private LinearLayout mTagContent;
 
     private NfcAdapter mAdapter;
     private PendingIntent mPendingIntent;
@@ -45,7 +32,7 @@ public class TapHereActivity extends Activity {
 
     private AlertDialog mDialog;
 
-    private Firebase eventRef,userRef;
+    private Firebase eventRef, userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +95,9 @@ public class TapHereActivity extends Activity {
     boolean userExists(String tagId){
         //ToDo: Check with Firebase
         Log.e("FB Querying ", tagId);
-        Query userQueryRef = userRef.orderByChild("userId").equalTo(tagId);
+        //Query userQueryRef = userRef.orderByChild("userId").equalTo(tagId);
 
-
+        /*
         userQueryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChild) {
@@ -138,13 +125,13 @@ public class TapHereActivity extends Activity {
             }
 
 
-        });
+        });*/
         return false;
     }
 
     void goToSuccess(String tagId){
         Intent successIntent = new Intent(TapHereActivity.this,SuccessActivity.class);
-
+        successIntent.putExtra("tagId",tagId);
         startActivity(successIntent);
     }
 
