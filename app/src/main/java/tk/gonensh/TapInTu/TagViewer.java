@@ -95,18 +95,20 @@ public class TagViewer extends Activity {
     //////////
     private void tagHandler(long tagId){
         //send data to Firebase
-        Checkin checkin = new Checkin(tagId);
-        //rootRef.setValue(checkin);
+        //Checkin checkin = new Checkin(tagId);
+        //Firebase checkinRef = rootRef.child("exampleEvent");
+
+        //checkinRef.setValue(checkin);
         Firebase usersRef = rootRef.child("users");
-        Map<String, String> alanisawesomeMap = new HashMap<String, String>();
-        alanisawesomeMap.put("birthYear", "1912");
-        alanisawesomeMap.put("fullName", "Alan Turing");
-        Map<String, String> gracehopMap = new HashMap<String, String>();
-        gracehopMap.put("birthYear", "1906");
-        gracehopMap.put("fullName", "Grace Hopper");
-        Map<String, Map<String, String>> users = new HashMap<String, Map<String, String>>();
-        users.put("alanisawesome", alanisawesomeMap);
-        users.put("gracehop", gracehopMap);
+
+        //TO-DO: Create Checkin class just like the example
+        //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
+
+        Checkin alanisawesome = new Checkin("Alan Turing", tagId);
+        Checkin gracehop = new Checkin("Grace Hopper", 1906);
+        Map<String, Checkin> users = new HashMap<String, Checkin>();
+        users.put("alanisawesome", alanisawesome);
+        users.put("gracehop", gracehop);
         usersRef.setValue(users);
 
         System.out.println("NFC read ID: "+tagId);
@@ -338,3 +340,5 @@ public class TagViewer extends Activity {
     }
 
 }
+
+
