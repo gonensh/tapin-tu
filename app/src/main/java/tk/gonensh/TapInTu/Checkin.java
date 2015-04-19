@@ -5,14 +5,14 @@ package tk.gonensh.TapInTu;
  */
 
 class Checkin {
-    private long userId;
+    private String userId;
     private String timestamp;
     public Checkin() {}
-    public Checkin(long userId, String timestamp) {
+    public Checkin(String userId, String timestamp) {
         this.timestamp = timestamp;
         this.userId = userId;
     }
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
     public String getTimestamp() {

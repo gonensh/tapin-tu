@@ -101,14 +101,12 @@ public class TapHereActivity extends Activity {
         //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
         //ToDo: Implement into HashMap
 
-        Firebase checkinRef = eventRef.child("checkins");
+        Firebase checkinRef = eventRef.child("checkins").push();
 
-        Map<String, String> checkins = new HashMap<String, String>();
         String timestamp = new Date().toString();
-        checkins.put(tagId,timestamp);
-
+        Checkin checkin = new Checkin(tagId,timestamp);
         //Push to Firebase
-        checkinRef.setValue(checkins);
+        checkinRef.setValue(checkin);
 
         System.out.println("NFC read ID: "+tagId);
 

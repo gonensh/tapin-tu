@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.core.Repo;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -46,15 +47,11 @@ public class CreateActivity extends Activity {
 
                 //submit new user to Firebase
                 Firebase fb = new Firebase(firebaseUrl);
-                Firebase userRef = fb.child("users");
-                //ToDO: Fix deleting old data
-                Map<String, User> users = new HashMap<String, User>();
-                String timestamp = new Date().toString();
-                User user = new User(user_name, user_id);
-                users.put(tagId,user);
+                Firebase userRef = fb.child("users/"+tagId);
 
-                //Push to Firebase
-                userRef.setValue(users);
+                User user = new User(user_name, user_id);
+
+                userRef.setValue(user);
 
                 Intent successIntent = new Intent(CreateActivity.this, SuccessActivity.class);
                 successIntent.putExtra("tagId", user_id);
