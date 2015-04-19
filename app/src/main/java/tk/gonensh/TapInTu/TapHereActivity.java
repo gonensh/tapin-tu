@@ -86,6 +86,7 @@ public class TapHereActivity extends Activity {
             return;
         }
 
+
         mPendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
@@ -160,11 +161,14 @@ public class TapHereActivity extends Activity {
     }
 
     void goToSuccess(long tagId){
-
+        Intent success = new Intent(TapHereActivity.this,SuccessActivity.class);
+        startActivity(success);
     }
 
     void goToCreateUser(long tagId){
+            if(!userExists(tagId)){
 
+            }
     }
 
     /////////

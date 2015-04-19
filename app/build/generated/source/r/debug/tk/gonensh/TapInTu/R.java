@@ -20,7 +20,7 @@ public final class R {
     public static final class layout {
         public static final int tag_divider=0x7f030000;
         public static final int tag_text=0x7f030001;
-        public static final int tap_here=0x7f030002;
+        public static final int tag_viewer=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
