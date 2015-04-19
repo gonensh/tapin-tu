@@ -68,7 +68,7 @@ public class TapHereActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tag_viewer);
+        setContentView(R.layout.tap_here);
 
         //setup Firebase
         Firebase.setAndroidContext(this);
@@ -108,6 +108,7 @@ public class TapHereActivity extends Activity {
         else
             goToCreateUser(tagId);
 
+
         //TO-DO: Create Checkin class just like the example
         //TO-DO: Follow program flow as sketched. (i.e. check if user exists, etc.)
 
@@ -122,27 +123,31 @@ public class TapHereActivity extends Activity {
 
     }
 
-    boolean userExists(long tagId){
+    boolean userExists(final long tagId){
         //ToDo: Check with Firebase
+        Log.e("FB Querying ",new Long(tagId).toString());
         Firebase userRef = new Firebase("https://tapin.firebaseio.com/users");
         Query userQueryRef = userRef.orderByChild("userId").equalTo(tagId);
         userQueryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChild) {
-                System.out.println("Added: "+snapshot.getKey());
+                System.out.println("FB Added: "+snapshot.getKey());
+                //ToDo: send user/timestamp to Firebase
+                goToSuccess(tagId);
             }
             public void onChildChanged(DataSnapshot snapshot, String previousChild) {
-                System.out.println("Changed: "+snapshot.getKey());
+                System.out.println("FB Changed: "+snapshot.getKey());
+                Log.e("FB Changed ",snapshot.getKey());
             }
             public void onChildMoved(DataSnapshot snapshot, String previousChild) {
-                System.out.println("Moved: "+snapshot.getKey());
+                System.out.println("FB Moved: "+snapshot.getKey());
             }
             public void onChildRemoved(DataSnapshot snapshot, String previousChild) {
-                System.out.println("Removed: "+snapshot.getKey());
+                System.out.println("FB Removed: "+snapshot.getKey());
             }
             @Override
             public void onChildRemoved(DataSnapshot snapshot) {
-                System.out.println("Removed: "+snapshot.getKey());
+                System.out.println("FB Removed: "+snapshot.getKey());
             }
             @Override
             public void onCancelled(FirebaseError e) {
