@@ -20,8 +20,10 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import tk.gonensh.TapInTu.record.ParsedNdefRecord;
 import android.app.Activity;
@@ -95,6 +97,17 @@ public class TagViewer extends Activity {
         //send data to Firebase
         Checkin checkin = new Checkin(tagId);
         //rootRef.setValue(checkin);
+        Firebase usersRef = rootRef.child("users");
+        Map<String, String> alanisawesomeMap = new HashMap<String, String>();
+        alanisawesomeMap.put("birthYear", "1912");
+        alanisawesomeMap.put("fullName", "Alan Turing");
+        Map<String, String> gracehopMap = new HashMap<String, String>();
+        gracehopMap.put("birthYear", "1906");
+        gracehopMap.put("fullName", "Grace Hopper");
+        Map<String, Map<String, String>> users = new HashMap<String, Map<String, String>>();
+        users.put("alanisawesome", alanisawesomeMap);
+        users.put("gracehop", gracehopMap);
+        usersRef.setValue(users);
 
         System.out.println("NFC read ID: "+tagId);
 
