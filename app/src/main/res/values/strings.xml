@@ -8,7 +8,7 @@
     <string name="error">Error</string>
     <string name="no_nfc">No NFC found on this device</string>
     <string name="nfc_disabled">NFC is not enabled. Please go to the wireless settings to enable it.</string>
-    <string name="title_activity_success_activity">success_activity</string>
+    <string name="title_activity_success_activity">Success!</string>
     <string name="app_name">TapIn</string>
     <string name="hello_world">Welcome!</string>
     <string name="action_settings">Settings</string>
