@@ -12,9 +12,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-
+        android:textSize="20dp"
         android:id="@+id/success"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentEnd="false"
+        android:textColor="#4c6076" />
 
     <Button
         android:layout_width="wrap_content"
