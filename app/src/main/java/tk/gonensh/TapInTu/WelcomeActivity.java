@@ -32,6 +32,7 @@ public class WelcomeActivity extends Activity {
                 Intent intent1 = new Intent(WelcomeActivity.this, TapHereActivity.class);
                 intent1.putExtra("event_name",event_name);
                 startActivity(intent1);
+                WelcomeActivity.this.finish();
             }
         });
     }

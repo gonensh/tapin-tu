@@ -39,6 +39,7 @@ public class TapHereActivity extends Activity {
 
         //get Event name from intent
         String event_name = getIntent().getStringExtra("event_name");
+        TapHereActivity.this.setTitle("TapInTU: "+event_name);
         //setup Firebase
         Firebase.setAndroidContext(this);
         String firebaseUrl = getResources().getString(R.string.firebaseUrl);
