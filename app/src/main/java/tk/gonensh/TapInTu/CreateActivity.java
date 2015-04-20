@@ -57,6 +57,7 @@ public class CreateActivity extends Activity {
                 successIntent.putExtra("userName", user_name);
                 successIntent.putExtra("tagId", user_id);
                 startActivity(successIntent);
+                CreateActivity.this.finish();
             }
         });
     }

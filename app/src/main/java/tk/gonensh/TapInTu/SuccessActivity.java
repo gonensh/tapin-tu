@@ -27,7 +27,9 @@ public class SuccessActivity extends Activity {
                                        @Override
                                        public void onClick(View view) {
                                            Intent to_scan = new Intent(SuccessActivity.this, TapHereActivity.class);
+                                           to_scan.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                            startActivity(to_scan);
+                                           SuccessActivity.this.finish();
                                        }
         });
     }

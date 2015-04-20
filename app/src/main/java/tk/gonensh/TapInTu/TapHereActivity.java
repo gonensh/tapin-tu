@@ -216,7 +216,7 @@ public class TapHereActivity extends Activity {
         }
         return sb.toString();
     }
-
+/*
     private long getDec(byte[] bytes) {
         long result = 0;
         long factor = 1;
@@ -238,7 +238,7 @@ public class TapHereActivity extends Activity {
         }
         return result;
     }
-
+*/
     @Override
     public void onNewIntent(Intent intent) {
         setIntent(intent);
