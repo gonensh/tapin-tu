@@ -54,6 +54,7 @@ public class CreateActivity extends Activity {
                 userRef.setValue(user);
 
                 Intent successIntent = new Intent(CreateActivity.this, SuccessActivity.class);
+                successIntent.putExtra("userName", user_name);
                 successIntent.putExtra("tagId", user_id);
                 startActivity(successIntent);
             }
